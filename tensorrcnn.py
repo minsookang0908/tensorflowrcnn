@@ -131,24 +131,26 @@ Ytest = Yte
 
 Xtrain = np.reshape(Xtrain,(50000, 3, 32, 32)).transpose(0,2,3,1).astype(float)
 Xtrain = Xtrain/255
-#print Xtrain[0]
+mean_trainB = np.mean(Xtrain[:,:,:,0],axis = 0)
+mean_trainB = np.expand_dims(mean_trainB, axis=0)
+mean_trainB = np.expand_dims(mean_trainB, axis=3)
+mean_trainG = np.mean(Xtrain[:,:,:,1],axis = 0)
+mean_trainG = np.expand_dims(mean_trainG, axis=0)
+mean_trainG = np.expand_dims(mean_trainG, axis=3)
+mean_trainR = np.mean(Xtrain[:,:,:,2], axis = 0)
+mean_trainR = np.expand_dims(mean_trainR, axis=0)
+mean_trainR = np.expand_dims(mean_trainR, axis=3)
+mean = np.concatenate((mean_trainB,mean_trainG, mean_trainR), axis =3)
+
+Xtrain = Xtrain - mean
+
 Xtest = np.reshape(Xtest,(10000, 3, 32, 32)).transpose(0,2,3,1).astype(float)
 Xtest = Xtest/255
-
-#print Ytrain[0]
-
-#Xtrain = np.reshape(Xtrain,(50000, 32, 32, 3)).transpose(0,1,2,3).astype(float)
-#Xtest = np.reshape(Xtest,(10000, 32, 32, 3)).transpose(0,1,2,3).astype(float)
-
-
+Xtest = Xtest - mean
+print Xtest.shape
                    
 XtestB = np.split(Xtest, 100);
 YtestB = np.split(Ytest, 100);                   
-
-#print('X # of batches:', len(Xbatches))
-#print('Y # of batches:', len(Ybatches))
-
-
 
 
 #X = tf.placeholder(tf.float32, [100, 32, 32, 3])  #1->100
