@@ -125,7 +125,7 @@ Yte = np.zeros([num_test, num_class])
 # print (min(Yr))
 Ytr[range(num_train), Yr] = 1
 # print Ytr[0]
-Yte[0:num_test, Ye[0:num_test]] = 1
+Yte[range(num_test), Ye] = 1
 num_train = Xtr.shape[0]
 num_test = Xte.shape[0]
 
