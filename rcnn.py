@@ -62,7 +62,7 @@ class RCNN:
 
         with tf.variable_scope('layer1') as scpoe:
             output = slim.conv2d(x, 96, 5, scope='conv1')
-            output = tf.nn.relu(output)
+             #output = tf.nn.relu(output)
             output = tf.nn.lrn(output,depth_radius = self.depth_radius, bias=1, alpha = self.alpha, beta = self.beta, name = 'LRN1') 
             output = slim.max_pool2d(output, [3, 3],valid = "SAME", scope='pool1')
           
